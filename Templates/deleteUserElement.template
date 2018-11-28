@@ -1,0 +1,18 @@
+<li class="dMW_element">
+	<div class="dMW_status_icon" id="%ID%">
+		<div class="dMW_status_icon_loading"></div>
+		<div class="dMW_status_icon_success">
+			<div class="dMW_suc suc1"></div>
+			<div class="dMW_suc suc2"></div>
+		</div>
+		<div class="dMW_status_icon_error">
+			<div class="dMW_err err1"></div>
+			<div class="dMW_err err2"></div>
+		</div>
+		
+	
+	</div>
+	
+	<div class="dMW_username">%USERNAME%</div>
+
+</div>

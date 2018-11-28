@@ -1,0 +1,6 @@
+<div class="userListMenu">
+	<div class="ulM_Element">Aktualisieren</div>
+	<div class="ulM_Element" onclick="showUserCreateWindow()">Benutzer erstellen</div>
+	<div class="ulM_Element deactivated" id="ulM_deleteBtn" onclick="showDeleteMultipleUser()">(0) Ausgewählte Benutzer löschen</div>
+</div>
+<ul class="userList">

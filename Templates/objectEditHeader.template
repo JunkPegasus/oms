@@ -1,8 +1,8 @@
 <div class="objectEditWindow">
 	<div class="objectEditHeader">
 		<div class="objectEdit_Menu">
-			<div class="objectEdit_MenuItem">Zurück</div>
-			<div class="objectEdit_MenuItem">Aktualisieren</div>
+			<div class="objectEdit_MenuItem" onclick="getObjectSubList(%REF_ID%)">Zurück</div>
+			<div class="objectEdit_MenuItem" onclick="editObjectWithId(%OBJECT_ID%)">Aktualisieren</div>
 			<div class="objectEdit_MenuItem" onclick="changeObjectPublicStatus(%OBJECT_ID%)">Veröffentlichen</div>
 			<div class="objectEdit_MenuItem" onclick="saveObjectFields(%REF_ID%)">Speichern</div>
 			<div class="objectEdit_MenuItem %HIDDEN_IMAGE%">Bilder hochladen</div>

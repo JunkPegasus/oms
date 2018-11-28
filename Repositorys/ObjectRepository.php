@@ -31,9 +31,9 @@ function loadObjectSubList($id) {
 
 
 function loadObject($id) {
-    $object;
-    $fields;
-    $images;
+    $object = null;
+    $fields = null;
+    $images = null;
 
     global $conn;
     $stmt = $conn->prepare("SELECT * FROM objectlist WHERE id=:id");
@@ -41,13 +41,16 @@ function loadObject($id) {
     $stmt->execute();
     $object = $stmt->fetch(PDO::FETCH_ASSOC);
 
+    $stmt = null;
+
     if($object != false) { 
         if($object['hasFields']) {
             $stmt = $conn->prepare("SELECT `fields`.*, fieldvalues.value FROM `fields` LEFT JOIN fieldvalues ON fieldvalues.refField=fields.id AND fieldvalues.refObj=:refObj WHERE `fields`.refId=:id");
             $stmt->bindParam("id", $object['refId']);
             $stmt->bindParam("refObj", $id);
             $stmt->execute();
-            $fields = $stmt->fetchAll(PDO::FETCH_ASSOC);
+            //$fields = $stmt->fetchAll(PDO::FETCH_ASSOC);
+            echo json_encode($id);
         } else {
             $fields = null;
         }
@@ -60,7 +63,7 @@ function loadObject($id) {
         } else {
             $images = null;
         }
-}
+    }
 
     $result['object'] = $object;
     $result['fields'] = $fields;
@@ -168,6 +171,7 @@ function sendObjectSubList($id) {
 function sendObject($id) {
     if(connectToDB()) {
         $object = loadObject($id);
+        new Response(true, $object);
         if($object != false) {
             new Response(true, $object);
         } else {

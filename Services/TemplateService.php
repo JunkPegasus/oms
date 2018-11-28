@@ -36,7 +36,7 @@ function allTemplates() {
     $index = 0;
     foreach($dir as $file) {
         $name = explode(".", $file);
-        $result[$name[0]] = utf8_encode(file_get_contents("../Templates/".$file));
+        $result[$name[0]] = file_get_contents_utf8("../Templates/".$file);
         $index++;
     }
     return json_encode($result);
@@ -53,4 +53,10 @@ function getScandirWithoutDots($path) {
     }
     return $ar;
 } 
+
+function file_get_contents_utf8($fn) {
+    $content = file_get_contents($fn);
+     return mb_convert_encoding($content, 'UTF-8',
+         mb_detect_encoding($content, 'UTF-8, ISO-8859-1', true));
+}
 ?>

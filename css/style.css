@@ -650,6 +650,10 @@ textarea:focus {
     background: rgb(28, 214, 44);
 }
 
+.dMW_suc.suc2 {
+    transform: translate(0, 0) rotate(45deg);
+}
+
 .dMW_err {
     background: rgb(255, 27, 15);
     top: 0;

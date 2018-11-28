@@ -33,6 +33,16 @@ function checkRequest() {
                     deleteUser(getPost("id"));
                 }
                 break;
+            case "editOrAddUser":
+                if(checkPost("user")) {
+                    editOrAddUser(getPost("user"));
+                }
+                break;
+            case "userDetails":
+                if(checkPost("id")) {
+                    sendUser(getPost("id"));
+                }
+                break;
             default:
                 new Response(false, "Wrong request");
                 break;

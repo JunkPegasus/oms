@@ -1,4 +1,6 @@
 <?php 
+// Konfiguration der Datenbank
+include_once("../Common/Database.php");
 
 function loadObjectList() {
     global $conn;
@@ -89,11 +91,7 @@ function saveFieldData($fields) {
                 break;
             }
         }
-        $response = new Response("Feld Daten speichern", $success);
-        $response->sendResponse();
-    } else {
-        $response = new Response("Can't connect to Database", false);
-        $response->sendResponse();
+        new Response($success,"Feld Daten speichern");
     }
 }
 
@@ -139,43 +137,30 @@ function deleteImage($id) {
         $success = $stmt->execute();
 
 
-        $response = new Response("Bild löschen", $success);
-        $response->sendResponse();
-    } else {
-        $response = new Response("Can't connect to Database", false);
-        $response->sendResponse();
-    }
+       new Response($success, "Bild löschen");
+    } 
 }
 
 
 function sendObjectList() {
     if(connectToDB()) {
         $objectList = loadObjectList();
-        $response;
         if($objectList != false) {
-            $response = new Response($objectList, true);
+            new Response(true, $objectList);
         } else {
-            $response = new Response("Objects can't be loaded from DB", false);
+            new Response(false,"Objects can't be loaded from DB");
         }
-        $response->sendResponse();
-    } else {
-        $response = new Response("Can't connect to Database", false);
-        $response->sendResponse();
     }
 }
 
 function sendObjectSubList($id) {
     if(connectToDB()) {
         $objectList = loadObjectSubList($id);
-        $response;
         if($objectList != false) {
-            $response = new Response($objectList, true);
+            new Response(true, $objectList);
         } else {
-            $response = new Response("Objects can't be loaded from DB", false);
+            new Response(false, "Objects can't be loaded from DB");
         }
-        $response->sendResponse();
-    } else {
-        $response = new Response("Can't connect to Database", false);
         $response->sendResponse();
     }
 }
@@ -184,17 +169,12 @@ function sendObjectSubList($id) {
 function sendObject($id) {
     if(connectToDB()) {
         $object = loadObject($id);
-        $response;
         if($object != false) {
-            $response = new Response($object, true);
+            new Response(true, $object);
         } else {
-            $response = new Response("Object can't be loaded from DB", false);
+            new Response(false, "Objects can't be loaded from DB");
         }
-        $response->sendResponse();
-    } else {
-        $response = new Response("Can't connect to Database", false);
-        $response->sendResponse();
-    }
+    } 
 }
 
 
@@ -214,12 +194,7 @@ function deleteObject($id) {
 
         $success = $stmt->execute();
 
-
-        $response = new Response("Objekt löschen.", $success);
-        $response->sendResponse();
-    } else {
-        $response = new Response("Can't connect to Database", false);
-        $response->sendResponse();
+        new Response($success, "Objekt löschen.");
     }
 }
 
@@ -231,8 +206,7 @@ function createObject($obj) {
         $path = createObjectFolder($objectType['name']);
 
         if($path == null) {
-            $response = new Response("Can't create folder", false);
-            $response->sendResponse();
+            new Response(false, "Can't create folder");
             return false;
         } else {
             $path = substr($path, 3);
@@ -251,11 +225,7 @@ function createObject($obj) {
 
         $success = $stmt->execute();
 
-        $response = new Response($objectType['name']." erstellen.", $success);
-        $response->sendResponse();
-    } else {
-        $response = new Response("Can't connect to Database", false);
-        $response->sendResponse();
+        new Response($success, $objectType['name']." erstellen.");
     }
 }
 
@@ -275,11 +245,7 @@ function changePublicStatus($id) {
 
         $success = $stmt->execute();
 
-        $response = new Response("Status ändern.", $success);
-        $response->sendResponse();
-    } else {
-        $response = new Response("Can't connect to Database", false);
-        $response->sendResponse();
+        new Response($success, "Status ändern.");
     }
 }
 

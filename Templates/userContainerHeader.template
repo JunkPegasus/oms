@@ -1,6 +1,20 @@
 <div class="userListMenu">
-	<div class="ulM_Element">Aktualisieren</div>
+	<div class="ulM_Element" onclick="getUserList(2)">Aktualisieren</div>
 	<div class="ulM_Element" onclick="showUserCreateWindow()">Benutzer erstellen</div>
-	<div class="ulM_Element deactivated" id="ulM_deleteBtn" onclick="showDeleteMultipleUser()">(0) Ausgew�hlte Benutzer l�schen</div>
+	<div class="ulM_Element deactivated" id="ulM_deleteBtn" onclick="showDeleteMultipleUser()">(0) Ausgewählte Benutzer löschen</div>
 </div>
 <ul class="userList">
+<li class="userList_element header">
+<div class="uLe_checkBox"></div>
+	<div class="uLe_container">
+		<div class="uLe_username">Benutzername</div>
+		<div class="uLe_surname">Vorname</div>
+		<div class="uLe_name">Nachname</div>
+		<div class="uLe_rights">Rechte</div>
+		<div class="uLe_isAdminAllowed">Adminzugriff</div>
+		<div class="uLe_userChanged">Benutzer geändert</div>
+		<div class="uLe_dateChanged">Datum geändert</div>
+		<div class="uLe_userCreated">Benutzer erstellt</div>
+		<div class="uLe_dateCreated">Datum erstellt</div>
+	</div>
+</li>

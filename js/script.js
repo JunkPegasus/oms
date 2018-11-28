@@ -80,6 +80,7 @@ function showUserManagement() {
 
 function removeAllCheckBoxes() {
     $(".checkBox").removeClass("active");
+    $('#ulM_deleteBtn').addClass("deactivated");
     userCheckBoxList = [];
 }
 
@@ -105,6 +106,7 @@ function changeDeleteButtonTextAndState() {
 }
 
 function editUserWithId(userID) {
+    $('.uEw_btn').addClass("active");
     $('.userEditWindow').show();
     getUserData(userID);
 }
@@ -199,6 +201,8 @@ function toggleUserListMenuBurgerMenu() {
 function showUserCreateWindow() {
     $('.userEditWindow').show();
     $('.uEw_form').trigger("reset");
+
+    $('.uEw_btn').removeClass("active");
     $('.uEw_caption').html("Benutzer erstellen");
     $('#uEw_id').val(99);
     $('#uEw_id')[0].temp = 0;

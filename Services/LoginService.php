@@ -20,8 +20,8 @@ if(!userLoggedIn()) {
         $stmt->bindParam(":username", getPost("username"));
         $stmt->execute();
         $result = $stmt->fetch(PDO::FETCH_ASSOC);
-        
-        if(password_verify(getPost("password"), $result['password'])) {
+
+        if(password_verify(getPost("password"), $result['password']) && $result['isAdminAllowed'] == 1) {
             $userToken = $result['username']."%§".(rand(1, 9999) * 6);
             $_SESSION['user'] = $result;
             $_SESSION['userToken'] = $userToken;

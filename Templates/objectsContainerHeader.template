@@ -1,0 +1,14 @@
+	<div class="objectListMenu">
+		<div class="ulM_Element" onclick="getObjectList()">Aktualisieren</div>
+	
+	</div>
+<ul class="objectList">
+
+	<li class="objectList_element header">
+		<div class="oLe_name">Name</div>
+		<div class="oLe_views">Views</div>
+		<div class="oLe_dateChanged">Datum geändert</div>
+		<div class="oLe_userChanged">Benutzer geändert</div>
+		<div class="oLe_dateCreated">Datum angelget</div>
+		<div class="oLe_userCreated">Benutzer angelegt</div>
+	</li>

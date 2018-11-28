@@ -1,12 +1,14 @@
-<li class="userList_element">
+<li class="userList_element element">
 	<div class="uLe_checkBox"><div class="checkBox" id="%CHECKBOXID%" onclick="toggleUser(%USERID%, '%CHECKBOXID%')"></div></div>
-	<div class="uLe_username">%USERNAME%</div>
-	<div class="uLe_surname">%SURNAME%</div>
-	<div class="uLe_name">%NAME%</div>
-	<div class="uLe_rights">%RIGHTS%</div>
-	<div class="uLe_isAdminAllowed">%ISADMINALLOWED%</div>
-	<div class="uLe_userChanged">%USERCHANGED%</div>
-	<div class="uLe_dateChanged">%DATECHANGED%</div>
-	<div class="uLe_userCreated">%USERCREATED%</div>
-	<div class="uLe_dateCreated">%DATECREATED%</div>
+	<div class="uLe_container"  onclick="editUserWithId(%USERID%)">
+		<div class="uLe_username">%USERNAME%</div>
+		<div class="uLe_surname">%SURNAME%</div>
+		<div class="uLe_name">%NAME%</div>
+		<div class="uLe_rights">%RIGHTS%</div>
+		<div class="uLe_isAdminAllowed">%ISADMINALLOWED%</div>
+		<div class="uLe_userChanged">%USERCHANGED%</div>
+		<div class="uLe_dateChanged">%DATECHANGED%</div>
+		<div class="uLe_userCreated">%USERCREATED%</div>
+		<div class="uLe_dateCreated">%DATECREATED%</div>
+	</div>
 </li>

@@ -281,7 +281,7 @@ function showObjectManagement() {
         header = oTemplates['objectsContainerHeader'];
         footer = oTemplates['objectsContainerFooter'];
         element = oTemplates['objectsElement'];
-        if (header != "" && footer != "" && element != "") {
+        if (header != undefined && footer != undefined && element != undefined) {
             html = header;
             var tmp;
             objectList.forEach(function(object) {
@@ -307,7 +307,7 @@ function showObjectSubManagement() {
         header = oTemplates['objectListContainerHeader'];
         footer = oTemplates['objectListContainerFooter'];
         element = oTemplates['objectListElement'];
-        if (header != "" && footer != "" && element != "") {
+        if (header != undefined && footer != undefined && element != undefined) {
             html = header.replaceAll("%OBJECTID%", objectSubList[0].refId);
             html = html.replaceAll("%OBJECTNAME%", objectSubList[0].refName);
             var tmp;

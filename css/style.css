@@ -733,7 +733,7 @@ textarea:focus {
 }
 
 .objectEdit_Heading.public::after {
-    content: 'Ã–ffentlich';
+    content: 'Öffentlich';
     background: rgb(28, 214, 44);
 }
 
@@ -815,7 +815,7 @@ textarea:focus {
 
 .objectEdit_Content_Image_Public_Indicator.public::after {
     background: rgb(28, 214, 44);
-    content: 'Ã–ffentlich';
+    content: 'Öffentlich';
 }
 
 .objectEdit_FieldList {

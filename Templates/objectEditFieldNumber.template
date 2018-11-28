@@ -1,0 +1,4 @@
+<div class="objectEdit_Field">
+	<div class="objectEdit_Form_Field_Heading">%FIELD_NAME%</div>
+	<input class="objectEditFieldInput" data-id="%FIELD_ID%"  type="number" placeholder="0" max=%MAX_LENGTH% min=%MIN_LENGTH% value="%FIELD_VALUE%">
+</div>

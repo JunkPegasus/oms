@@ -31,21 +31,43 @@ function checkRequest() {
             case "deleteUser":
                 if(checkPost("id")) {
                     deleteUser(getPost("id"));
+                }else {
+                    new Response(false, "Wrong request");
                 }
                 break;
             case "editOrAddUser":
                 if(checkPost("user")) {
                     editOrAddUser(getPost("user"));
+                }else {
+                    new Response(false, "Wrong request");
                 }
                 break;
             case "userDetails":
                 if(checkPost("id")) {
                     sendUser(getPost("id"));
+                }else {
+                    new Response(false, "Wrong request");
                 }
                 break;
             case "objectSubList":
                 if(checkPost("listId")) {
                     sendObjectSubList(getPost("listId"));
+                }else {
+                    new Response(false, "Wrong request");
+                }
+                break;
+            case "object":
+                if(checkPost("objId")) {
+                    sendObject(getPost("objId"));
+                } else {
+                    new Response(false, "Wrong request");
+                }
+                break;
+            case "changePublic":
+                if(checkPost("id")) {
+                    changePublicStatus(getPost("id"));
+                } else {
+                    new Response(false, "Wrong request");
                 }
                 break;
             default:

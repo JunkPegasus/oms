@@ -1,8 +1,8 @@
 	<div class="objectListMenu">
 		<div class="ulM_Element" onclick="getObjectList()">Zurück</div>
 		<div class="ulM_Element" onclick="getObjectSubList(%OBJECTID%)">Aktualisieren</div>
-	
 	</div>
+	<h1>%OBJECTNAME%</h1>
 <ul class="objectList">
 
 	<li class="objectList_element header">

@@ -159,9 +159,8 @@ function sendObjectSubList($id) {
         if($objectList != false) {
             new Response(true, $objectList);
         } else {
-            new Response(false, "Objects can't be loaded from DB");
+            new Response(true, []);
         }
-        $response->sendResponse();
     }
 }
 

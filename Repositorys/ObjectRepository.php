@@ -49,8 +49,7 @@ function loadObject($id) {
             $stmt->bindParam("id", $object['refId']);
             $stmt->bindParam("refObj", $id);
             $stmt->execute();
-            //$fields = $stmt->fetchAll(PDO::FETCH_ASSOC);
-            echo json_encode($id);
+            $fields = $stmt->fetchAll(PDO::FETCH_ASSOC);
         } else {
             $fields = null;
         }
@@ -171,7 +170,6 @@ function sendObjectSubList($id) {
 function sendObject($id) {
     if(connectToDB()) {
         $object = loadObject($id);
-        new Response(true, $object);
         if($object != false) {
             new Response(true, $object);
         } else {

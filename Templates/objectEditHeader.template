@@ -4,7 +4,7 @@
 			<div class="objectEdit_MenuItem" onclick="getObjectSubList(%REF_ID%)">Zurück</div>
 			<div class="objectEdit_MenuItem" onclick="editObjectWithId(%OBJECT_ID%)">Aktualisieren</div>
 			<div class="objectEdit_MenuItem" onclick="changeObjectPublicStatus(%OBJECT_ID%)">Veröffentlichen</div>
-			<div class="objectEdit_MenuItem" onclick="saveObjectFields(%REF_ID%)">Speichern</div>
+			<div class="objectEdit_MenuItem" onclick="saveObjectFields(%OBJECT_ID%)">Speichern</div>
 			<div class="objectEdit_MenuItem %HIDDEN_IMAGE%">Bilder hochladen</div>
 			<div class="objectEdit_MenuItem" onclick="deleteObjectRequest(%OBJECT_ID%, %REF_ID%)">Löschen</div>
 		</div>

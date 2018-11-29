@@ -732,9 +732,30 @@ textarea:focus {
     color: white;
 }
 
-.objectEdit_Heading.public::after {
+.oSLE_publicIndicator {
+    position: relative;
+    height: 100%;
+}
+
+.oSLE_publicIndicator::after {
+    border-radius: 4px;
+    font-family: 'Open Sans', sans-serif;
+    font-weight: 300;
+    right: 0;
+    font-size: 14px;
+    padding: 3px 7px;
+    color: white;
+}
+
+.objectEdit_Heading.public::after,
+.oSLE_publicIndicator.public::after {
     content: 'Öffentlich';
     background: rgb(28, 214, 44);
+}
+
+.oSLE_publicIndicator.internal::after {
+    content: 'Verborgen';
+    background: rgb(255, 27, 15);
 }
 
 .objectEdit_Form_Field_Heading {

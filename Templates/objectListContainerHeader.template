@@ -1,6 +1,7 @@
 	<div class="objectListMenu">
-		<div class="ulM_Element" onclick="getObjectList()">Zurück</div>
+		<div class="ulM_Element" onclick="getObjectList()">ZurÃ¼ck</div>
 		<div class="ulM_Element" onclick="getObjectSubList(%OBJECTID%)">Aktualisieren</div>
+		<div class="ulM_Element" onclick="openCreateObjectWindow(%OBJECTID%, '%OBJECTNAME%')">%OBJECTNAME% erstellen</div>
 	</div>
 	<h1>%OBJECTNAME%</h1>
 <ul class="objectList">
@@ -9,8 +10,8 @@
 		<div class="oSLe_name">Name</div>
 		<div class="oSLe_views">Views</div>
 		<div class="oSLe_public">Public</div>
-		<div class="oSLe_dateChanged">Datum geändert</div>
-		<div class="oSLe_userChanged">Benutzer geändert</div>
+		<div class="oSLe_dateChanged">Datum geÃ¤ndert</div>
+		<div class="oSLe_userChanged">Benutzer geÃ¤ndert</div>
 		<div class="oSLe_dateCreated">Datum angelget</div>
 		<div class="oSLe_userCreated">Benutzer angelegt</div>
 	</li>

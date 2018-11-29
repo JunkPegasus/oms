@@ -1,0 +1,12 @@
+<div class="createObjectWindow">
+	<div class="cOW_Header"><div class="uEw_caption">%OBJECT_NAME% erstellen</div>
+	<div class="cOW_closeBtn" onclick="closeCreateObjectWindow()">
+		<img src="images/icons/SVG/Icon_Close_White.svg">
+	</div></div>
+	<div class="cOW_formField">
+		<input type="text" id="objectName">
+	</div>
+	<div class="cOW_footer">
+		<div class="cOW_SubmitBtn" onclick="sendCreateObjectRequest(%OBJECT_REFID%)">Erstellen</div>
+	</div>
+</div>

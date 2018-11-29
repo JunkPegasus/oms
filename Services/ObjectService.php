@@ -70,6 +70,27 @@ function checkRequest() {
                     new Response(false, "Wrong request");
                 }
                 break;
+            case "saveFieldData":
+                if(checkPost("fields")) {
+                    saveFieldData(getPost("fields"));
+                } else {
+                    new Response(false, "Wrong request");
+                }
+                break;
+            case "createObject":
+                if(checkPost("obj")) {
+                    createObject(getPost("obj"));
+                } else {
+                    new Response(false, "Wrong request");
+                }
+                break;
+            case "deleteObject":
+                if(checkPost("objId")) {
+                    deleteObject(getPost("objId"));
+                } else {
+                    new Response(false, "Wrong request");
+                }
+                break;
             default:
                 new Response(false, "Wrong request");
                 break;

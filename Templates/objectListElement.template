@@ -1,7 +1,9 @@
 <li class="objectList_element element" onclick="editObjectWithId(%ID%)">
 		<div class="oSLe_name">%NAME%</div>
 		<div class="oSLe_views">%VIEWS%</div>
-		<div class="oSLe_public">%PUBLIC%</div>
+		<div class="oSLe_public">
+			<div class="oSLE_publicIndicator %PUBLIC%"></div>
+			</div>
 		<div class="oSLe_dateChanged">%DATECHANGED%</div>
 		<div class="oSLe_userChanged">%USERCHANGED%</div>
 		<div class="oSLe_dateCreated">%DATECREATED%</div>

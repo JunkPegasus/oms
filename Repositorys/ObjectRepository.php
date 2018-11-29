@@ -221,8 +221,8 @@ function createObject($obj) {
         $stmt->bindParam(':hasImages', $objectType['hasImages']);
         $stmt->bindParam(':hasFields', $objectType['hasFields']);
         $stmt->bindParam(':refName', $objectType['name']);
-        $stmt->bindParam(':userCreated', $_SESSION['username']);
-        $stmt->bindParam(':userChanged', $_SESSION['username']);
+        $stmt->bindParam(':userCreated', $_SESSION['userName']);
+        $stmt->bindParam(':userChanged', $_SESSION['userName']);
 
         $success = $stmt->execute();
 

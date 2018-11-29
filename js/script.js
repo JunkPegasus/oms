@@ -316,7 +316,7 @@ function showObjectSubManagement() {
                 tmp = tmp.replaceAll("%ID%", object.id);
                 tmp = tmp.replaceAll("%NAME%", object.name);
                 tmp = tmp.replaceAll("%VIEWS%", object.views);
-                tmp = tmp.replaceAll("%PUBLIC%", object.views);
+                tmp = tmp.replaceAll("%PUBLIC%", (object.public == 1 ? "public" : "internal"));
                 tmp = tmp.replaceAll("%DATECREATED%", object.dateCreated);
                 tmp = tmp.replaceAll("%USERCREATED%", object.userCreated);
                 tmp = tmp.replaceAll("%DATECHANGED%", object.dateChanged);

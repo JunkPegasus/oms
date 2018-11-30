@@ -31,7 +31,8 @@ if (!userLoggedIn()) {
                 <div class="nav_menu">
                     <div class="nav_menu_button"onclick="getObjectList()">Objekte</div>
                     <div class="nav_menu_button" onclick="getUserList(2)">Benutzer</div>
-                    <div class="nav_menu_button">Changelog</div>
+                    <div class="nav_menu_button">Login-Log</div>
+                    <div class="nav_menu_button newIndicator">Changelog</div>
                 </div>
             </div>
             <div class="nav_right">

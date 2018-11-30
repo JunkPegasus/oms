@@ -804,6 +804,7 @@ textarea:focus {
 
 .objectEdit_Content_ImageList {
     display: flex;
+    flex-wrap: wrap;
 }
 
 .objectEdit_Content_Image img {

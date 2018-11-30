@@ -1,9 +1,9 @@
 <div class="objectEdit_Content_Image">
-	<img src="IMAGE_SRC">
-	<div class="objectEdit_Content_Image_Public_Indicator %IMAGE_INTERNAL% %IMAGE_PUBLIC%">
+	<img src="%IMAGE_SRC%">
+	<div class="objectEdit_Content_Image_Public_Indicator %IMAGE_INTERNAL% %IMAGE_PUBLIC%"></div>
 	<div class="objectEdit_Content_Image_Overlay_Container">
 		<div class="objectEdit_Content_Image_Overlay">Intern</div>
 		<div class="objectEdit_Content_Image_Overlay">Öffentlich</div>
-		<div class="objectEdit_Content_Image_Overlay" onclick="deleteObjectImage(%IMAGE_ID%, "%REF_ID%")">Löschen</div>
+		<div class="objectEdit_Content_Image_Overlay" onclick="deleteObjectImage(%IMAGE_ID%, %REF_ID%)">Löschen</div>
 	</div>
 </div>

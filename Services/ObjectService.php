@@ -91,6 +91,13 @@ function checkRequest() {
                     new Response(false, "Wrong request");
                 }
                 break;
+            case "deleteImage":
+                if(checkPost("id")) {
+                    deleteImage(getPost("id"));
+                } else {
+                    new Response(false, "Wrong request");
+                }
+                break;
             default:
                 new Response(false, "Wrong request");
                 break;

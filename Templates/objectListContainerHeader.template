@@ -9,7 +9,7 @@
 	<li class="objectList_element header">
 		<div class="oSLe_name">Name</div>
 		<div class="oSLe_views">Views</div>
-		<div class="oSLe_public">Public</div>
+		<div class="oSLe_public">Status</div>
 		<div class="oSLe_dateChanged">Datum geändert</div>
 		<div class="oSLe_userChanged">Benutzer geändert</div>
 		<div class="oSLe_dateCreated">Datum angelget</div>

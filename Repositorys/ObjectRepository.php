@@ -128,7 +128,7 @@ function deleteImage($id) {
         $stmt->execute();
         $path = $stmt->fetch(PDO::FETCH_ASSOC);
         if($path != false) {
-            $path = $path['path'];
+            $path = "../".$path['path'];
             if(file_exists($path)) {
                 unlink($path);
             }  

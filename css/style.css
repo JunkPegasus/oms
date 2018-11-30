@@ -809,7 +809,7 @@ textarea:focus {
 .objectEdit_Content_Image img {
     max-height: 100%;
     max-width: 100%;
-    display: none;
+    min-width: 100%;
 }
 
 .objectEdit_Content_Image_Public_Indicator {

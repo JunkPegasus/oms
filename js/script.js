@@ -1,6 +1,11 @@
 var userCheckBoxList = [];
+var Settings;
 
 $(document).ready(function() {
+    Settings = JSON.parse(localStorage.getItem("omsSettings"));
+
+
+
     $('.uploadImagesWindow [type=file]').on('change', function() {
         var fileCounter = this.files.length;
         var text = $(this).attr("placeholder");
@@ -449,4 +454,8 @@ function showImageUploadWindow(id) {
     $('#iUpload').resetForm();
     $('#objId').val(id);
     $('.uploadImagesWindow').show();
+}
+
+function saveLocalSettings() {
+    localStorage.setItem("omsSettings", JSON.stringify(Settings));
 }

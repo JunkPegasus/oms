@@ -31,6 +31,7 @@ function getChangelog() {
             if (bTry) {
                 changeLog = response.data;
                 addChangelog();
+                checkChangeLog();
             }
         }
     });
@@ -185,7 +186,55 @@ function getObjectList() {
                     objectList = response.data;
                     showObjectManagement();
                 }
-            } else {}
+            }
+        }
+
+    });
+}
+
+
+
+function changeImageInternal(id, refId) {
+    $.post({
+        url: "Services/ObjectService.php",
+        data: {
+            request: "changeImageInternal",
+            id: id
+        },
+        success: function(response) {
+            var bTry = true;
+            try {
+                response = JSON.parse(response);
+            } catch (e) {
+                console.log(e);
+                bTry = false;
+            }
+            if (bTry) {
+                editObjectWithId(refId);
+            }
+        }
+
+    });
+}
+
+function changeImagePublic(id, refId) {
+    $.post({
+        url: "Services/ObjectService.php",
+        data: {
+            request: "changeImagePublic",
+            id: id
+        },
+        success: function(response) {
+            var bTry = true;
+            try {
+                response = JSON.parse(response);
+            } catch (e) {
+                console.log(e);
+                bTry = false;
+            }
+            if (bTry) {
+                editObjectWithId(refId);
+            }
         }
 
     });

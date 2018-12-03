@@ -98,6 +98,20 @@ function checkRequest() {
                     new Response(false, "Wrong request");
                 }
                 break;
+            case "changeImageInternal":
+                if(checkPost("id")) {
+                    changeImageInternal(getPost("id"));
+                } else {
+                    new Response(false, "Wrong request");
+                }
+                break;
+            case "changeImagePublic":
+                if(checkPost("id")) {
+                    changeImagePublic(getPost("id"));
+                } else {
+                    new Response(false, "Wrong request");
+                }
+                break;
             default:
                 new Response(false, "Wrong request");
                 break;

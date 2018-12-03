@@ -283,4 +283,56 @@ function createFolder($path) {
     }
 }
 
+function getImage($id) {
+    global $conn;
+
+    $stmt = $conn->prepare("SELECT * FROM images WHERE id=:id");
+    $stmt->bindParam(':id', $id);
+    $stmt->execute();
+    return $stmt->fetch();
+
+}
+
+function changeImagePublic($id) {
+    if(connectToDB()) {
+        global $conn;
+        $image = getImage($id);
+        if($image != false) {
+            $public = 0;
+            if($image['public'] == "0") {
+                $public = 1;
+            }
+            $stmt = $conn->prepare("UPDATE images SET public=:public WHERE id=:id");
+            $stmt->bindParam(':public', $public);
+            $stmt->bindParam(':id', $id);
+            $success = $stmt->execute();
+            new Response($success, "Bild veröffentlichen");
+        } else {
+            new Response(false, "Bild nicht vorhanden");
+        }
+
+    }
+}
+
+function changeImageInternal($id) {
+    if(connectToDB()) {
+        global $conn;
+        $image = getImage($id);
+        if($image != false) {
+            $internal = 0;
+            if($image['internal'] == "0") {
+                $internal = 1;
+            }
+            $stmt = $conn->prepare("UPDATE images SET internal=:internal WHERE id=:id");
+            $stmt->bindParam(':internal', $internal);
+            $stmt->bindParam(':id', $id);
+            $success = $stmt->execute();
+            new Response($success, "Bild in internen Bereich schieben");
+        }else {
+            new Response(false, "Bild nicht vorhanden");
+        }
+
+    }
+}
+
 ?>

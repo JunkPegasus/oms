@@ -529,3 +529,12 @@ function showChangelog() {
     $('.changeLogWindow').show();
     $('.nav_menu_button.newIndicator').removeClass("newIndicator");
 }
+
+function checkChangeLog() {
+    changeLog.forEach(function(change) {
+        if (change.new == "1") {
+            $('#changelogToggle').addClass("newIndicator");
+
+        }
+    });
+}

@@ -7,6 +7,6 @@
 		<input type="text" id="objectName">
 	</div>
 	<div class="cOW_footer">
-		<div class="cOW_SubmitBtn" onclick="sendCreateObjectRequest(%OBJECT_REFID%)">Erstellen</div>
+		<div class="cOW_SubmitBtn" onclick="sendCreateObjectRequest(%OBJECT_REFID%, '%OBJECT_NAME%')">Erstellen</div>
 	</div>
 </div>

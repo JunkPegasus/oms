@@ -1,4 +1,4 @@
-	<li class="objectList_element element" onclick="getObjectSubList(%ID%)">
+	<li class="objectList_element element" onclick="getObjectSubList(%ID%, '%NAME%')">
 		<div class="oLe_name">%NAME%</div>
 		<div class="oLe_views">%VIEWS%</div>
 		<div class="oLe_dateChanged">%DATECHANGED%</div>

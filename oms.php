@@ -32,7 +32,7 @@ if (!userLoggedIn()) {
                     <div class="nav_menu_button"onclick="getObjectList()">Objekte</div>
                     <div class="nav_menu_button" onclick="getUserList(2)">Benutzer</div>
                     <div class="nav_menu_button">Login-Log</div>
-                    <div class="nav_menu_button newIndicator">Changelog</div>
+                    <div class="nav_menu_button newIndicator" onclick="showChangelog()">Changelog</div>
                 </div>
             </div>
             <div class="nav_right">
@@ -46,8 +46,14 @@ if (!userLoggedIn()) {
                     <div class="nav_menu_icon">
                         <img src="images/icons/SVG/Icon_User.svg">
                     </div>
-                    <div class="nav_menu_icon">
-                        <img src="images/icons/SVG/Icon_Settings.svg">
+                    <div class="nav_menu_icon" onclick="$('.nav_menu_subElement.right').toggle()">
+                        <img src="images/icons/SVG/Icon_Settings.svg"> 
+                    </div>
+                </div>
+                <div class="nav_menu_subElement right" >
+                    <div class="settingsContainer"></div>
+                    <div class="settingsElement">
+                        <div class="saveSettingsButton" onclick="saveSettings()">Speichern</div>
                     </div>
                 </div>
             </div>
@@ -152,6 +158,21 @@ if (!userLoggedIn()) {
                     <input type="hidden" name="objId" id="objId" value=1>
                     <input type="submit" value="Hochladen">
                 </form>
+            </div>
+        </div>
+
+
+        <div class="changeLogWindow">
+            <div class="windowHeader">
+                <div class="windowheaderCaption">Changelog</div>
+                <div class="windowheaderCloseBtn" onclick="closeTarget('.changeLogWindow')">
+                    <img src="images/icons/SVG/Icon_Close_White.svg">
+                </div>
+            </div>
+            <div class="changeLogWindowContent">
+                <ul class="list" id="changelogList">
+                    
+                </ul>
             </div>
         </div>
     </body>

@@ -56,7 +56,7 @@ function editOrAddUser($user) {
             $rights = $user['rights'];
         }
         $isAdminAllowed = 0;
-        if($user['isAdminAllowed']) {
+        if($user['isAdminAllowed'] == "true") {
             $isAdminAllowed = 1;
         }
         if($mode == "new") {
@@ -76,16 +76,22 @@ function editOrAddUser($user) {
             new Response($stmt->execute(), "Benutzer anlegen.");
 
         } else if($mode == "edit") {
-            $stmt = $conn->prepare("UPDATE user SET name=:name, username=:username, surname=:surname, rights=:rights, isAdminAllowed=:isAdminAllowed, userChanged=:userChanged, dateChanged=CURRENT_TIMESTAMP WHERE id=:id");
-            $stmt->bindParam(":username", $user['username']);
-            $stmt->bindParam(":name", $user['name']);
-            $stmt->bindParam(":surname", $user['surname']);
-            $stmt->bindParam(":rights", $rights);
-            $stmt->bindParam(":isAdminAllowed", $isAdminAllowed);
-            $stmt->bindParam(":userChanged", $_SESSION['userName']);
-            $stmt->bindParam(":id", $user['id']);
-            
-            new Response($stmt->execute(), "Benutzer bearbeiten.");
+            $targetUser = getUser($user['id']);
+            if($targetUser['editable'] == 1) {
+                $stmt = $conn->prepare("UPDATE user SET name=:name, username=:username, surname=:surname, rights=:rights, isAdminAllowed=:isAdminAllowed, userChanged=:userChanged, dateChanged=CURRENT_TIMESTAMP WHERE id=:id");
+                $stmt->bindParam(":username", $user['username']);
+                $stmt->bindParam(":name", $user['name']);
+                $stmt->bindParam(":surname", $user['surname']);
+                $stmt->bindParam(":rights", $rights);
+                $stmt->bindParam(":isAdminAllowed", $isAdminAllowed);
+                $stmt->bindParam(":userChanged", $_SESSION['userName']);
+                $stmt->bindParam(":id", $user['id']);
+                
+                new Response($stmt->execute(), "Benutzer bearbeiten.");
+
+            } else {
+                new Response(false, "Benutzer bearbeiten.");
+            }
         }
     }
 }

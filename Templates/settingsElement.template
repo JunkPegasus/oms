@@ -1,0 +1,4 @@
+ <div class="settingsElement">
+                        <div class="checkBox settings %ACTIVE%" data-id="%ID%" onclick="toggleActive(this)"></div>
+                        <div class="settingsElement_text">%TEXT%</div>
+                    </div>

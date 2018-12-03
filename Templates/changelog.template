@@ -1,0 +1,5 @@
+<li class="changeLogElement">
+                        <div class="changeLogElement_Header %NEW%">
+                            <div class="changeLogElement_Date">%DATE%</div>
+                            <h4>%TYPE%</h4>
+                        </div>

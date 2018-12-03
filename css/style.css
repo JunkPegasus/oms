@@ -7,6 +7,19 @@
     --color-sienna: #3D0814;
 }
 
+::-webkit-scrollbar {
+    width: 10px;
+}
+
+ ::-webkit-scrollbar-thumb {
+    background-color: var(--color-dark-blue);
+    border-radius: 6px;
+}
+
+ ::-webkit-scrollbar-thumb:hover {
+    background-color: var(--color-orange);
+}
+
 html,
 body {
     margin: 0;
@@ -60,6 +73,7 @@ textarea:focus {
     display: flex;
     align-items: center;
     height: 100%;
+    position: relative;
 }
 
 .nav_menu_button {
@@ -87,6 +101,7 @@ textarea:focus {
     align-items: center;
     transition: transform ease 0.266s;
     cursor: pointer;
+    position: relative;
 }
 
 .nav_menu_icon a {
@@ -606,6 +621,20 @@ textarea:focus {
     display: none;
 }
 
+.changeLogWindow {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 30%;
+    background: white;
+    border-radius: 6px;
+    border: 1px solid rgba(0, 0, 0, .1);
+    box-shadow: 0 0 8px rgba(0, 0, 0, .1);
+    display: none;
+    height: 70%;
+}
+
 .dMW_content {
     width: 100%;
     padding: 20px;
@@ -978,4 +1007,108 @@ textarea:focus {
     14% {
         transform: translate(0, 0);
     }
+}
+
+.list {
+    list-style-type: none;
+    padding: 0;
+    margin: 0;
+}
+
+.changeLogElement_Header {
+    border-top: 1px solid rgba(0, 0, 0, .1);
+    border-bottom: 1px solid rgba(0, 0, 0, .1);
+    padding: 5px 20px;
+    background: rgb(240, 240, 240);
+}
+
+.changeLogElement_Header h4 {
+    margin: 5px 0;
+}
+
+.changeLogElement ul {
+    list-style-type: disc;
+}
+
+.changeLogElement_Date {
+    font-style: italic;
+    font-weight: 300;
+}
+
+.changeLogElement_Header.new h4::after {
+    content: 'Neu';
+    background: var(--color-orange);
+    padding: 3px 5px;
+    border-radius: 15px;
+    color-interpolation-filters: white;
+    display: inline-block;
+    color: white;
+    font-weight: 300;
+    margin-left: 5px;
+    font-size: 13px;
+}
+
+.changeLogWindowContent {
+    overflow: auto;
+    height: calc(100% - 50px);
+}
+
+.changeLogElement {
+    margin-bottom: 15px;
+}
+
+.settingsElement {
+    display: flex;
+    min-width: 300px;
+    align-items: center;
+}
+
+.settingsElement:not(:last-of-type) {
+    margin-bottom: 10px;
+}
+
+.nav_menu_subElement {
+    position: absolute;
+    top: 110%;
+    background: white;
+    border-radius: 6px;
+    filter: drop-shadow(0 0 5px rgba(0, 0, 0, .3));
+    color: var(--color-dark-blue);
+    padding: 20px;
+    width: auto;
+    right: 0;
+    display: none;
+}
+
+.nav_menu_subElement::after {
+    position: absolute;
+    content: '';
+    width: 20px;
+    height: 20px;
+    background: white;
+    top: -10px;
+    right: 24px;
+    transform: rotate(45deg);
+    border-radius: 5px;
+}
+
+.settingsElement_text {
+    margin-left: 10px;
+}
+
+.saveSettingsButton {
+    width: 100%;
+    text-align: center;
+    padding: 6px 0;
+    border: 1px solid rgba(0, 0, 0, .1);
+    border-radius: 6px;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    margin-top: 10px;
+}
+
+.saveSettingsButton:hover {
+    color: white;
+    background: var(--color-orange);
+    border: 1px solid var(--color-orange);
 }

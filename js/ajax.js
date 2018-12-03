@@ -3,13 +3,87 @@ var objectList;
 var oTemplates;
 var objectSubList;
 var oEditableObject;
+var changeLog;
+var serverSettings;
 
 $(document).ready(function() {
     getUserList(1);
 
     // Dieser Request holt alle HTML Templates vom Server
     getTemplates();
+
 });
+
+function getChangelog() {
+    $.post({
+        url: "Services/CommonService.php",
+        data: {
+            request: "changelog"
+        },
+        success: function(response) {
+            var bTry = true;
+            try {
+                response = JSON.parse(response);
+            } catch (e) {
+                bTry = false;
+                console.log(e);
+            }
+            if (bTry) {
+                changeLog = response.data;
+                addChangelog();
+            }
+        }
+    });
+}
+
+function getSettings() {
+    $.post({
+        url: "Services/CommonService.php",
+        data: {
+            request: "settings"
+        },
+        success: function(response) {
+            var bTry = true;
+            try {
+                response = JSON.parse(response);
+            } catch (e) {
+                bTry = false;
+                console.log(e);
+            }
+            if (bTry) {
+                serverSettings = response.data;
+                addSettings();
+            }
+        }
+    });
+}
+
+function saveSettingsRequest(settings) {
+    showStatusBar("Speichern..");
+    $.post({
+        url: "Services/CommonService.php",
+        data: {
+            request: "saveSettings",
+            settings: settings
+        },
+        success: function(response) {
+            var bTry = true;
+            try {
+                response = JSON.parse(response);
+            } catch (e) {
+                bTry = false;
+                console.log(e);
+            }
+            if (bTry) {
+                changeStatusBarStatus("success");
+                changeStatusBarText("Erfolgreich gespeichert");
+            } else {
+                changeStatusBarStatus("error");
+                changeStatusBarText("Fehler beim Speichern");
+            }
+        }
+    });
+}
 
 function getTemplates() {
     $.post({
@@ -27,6 +101,9 @@ function getTemplates() {
             }
             if (bTry) {
                 oTemplates = response;
+                getChangelog();
+
+                getSettings();
             }
         }
     });
@@ -114,7 +191,7 @@ function getObjectList() {
     });
 }
 
-function getObjectSubList(id) {
+function getObjectSubList(id, name) {
     $.post({
         url: "Services/ObjectService.php",
         data: {
@@ -132,7 +209,7 @@ function getObjectSubList(id) {
             if (bTry) {
                 if (response.success == true) {
                     objectSubList = response.data;
-                    showObjectSubManagement();
+                    showObjectSubManagement(id, name);
                 }
             } else {}
         }
@@ -270,7 +347,7 @@ function loadObjectData(id) {
 
 
 
-function deleteObjectRequest(id, refId) {
+function deleteObjectRequest(id, refId, refName) {
     showStatusBar("Löschen...");
     $.post({
         url: "Services/ObjectService.php",
@@ -290,7 +367,7 @@ function deleteObjectRequest(id, refId) {
                 if (response.success == true) {
                     changeStatusBarStatus("success");
                     changeStatusBarText("Erfolgreich gelöscht");
-                    getObjectSubList(refId);
+                    getObjectSubList(refId, refName);
                 } else {
                     changeStatusBarStatus("error");
                     changeStatusBarText("Fehler beim Löschen");
@@ -305,7 +382,7 @@ function deleteObjectRequest(id, refId) {
 }
 
 
-function createObject(obj, id) {
+function createObject(obj, id, name) {
     showStatusBar("Speichern...");
     $.post({
         url: "Services/ObjectService.php",
@@ -325,7 +402,7 @@ function createObject(obj, id) {
                 if (response.success == true) {
                     changeStatusBarStatus("success");
                     changeStatusBarText("Erfolgreich erstellt");
-                    getObjectSubList(id);
+                    getObjectSubList(id, name);
                 } else {
                     changeStatusBarStatus("error");
                     changeStatusBarText("Fehler beim Erstellen");
@@ -339,9 +416,9 @@ function createObject(obj, id) {
     });
 }
 
-function sendCreateObjectRequest(id) {
+function sendCreateObjectRequest(id, name) {
     var obj = { name: $('#objectName').val(), refId: id };
-    createObject(obj, id);
+    createObject(obj, id, name);
     $('.createObjectWindow').remove();
     return false;
 }

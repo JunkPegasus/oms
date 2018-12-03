@@ -1,6 +1,6 @@
 	<div class="objectListMenu">
 		<div class="ulM_Element" onclick="getObjectList()">Zurück</div>
-		<div class="ulM_Element" onclick="getObjectSubList(%OBJECTID%)">Aktualisieren</div>
+		<div class="ulM_Element" onclick="getObjectSubList(%OBJECTID%,'%OBJECTNAME%')">Aktualisieren</div>
 		<div class="ulM_Element" onclick="openCreateObjectWindow(%OBJECTID%, '%OBJECTNAME%')">%OBJECTNAME% erstellen</div>
 	</div>
 	<h1>%OBJECTNAME%</h1>

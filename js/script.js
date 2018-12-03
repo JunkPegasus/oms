@@ -50,6 +50,41 @@ $(document).ready(function() {
 
 });
 
+function toggleActive(element) {
+    $(element).toggleClass("active");
+}
+
+function saveSettings() {
+    var saveObj = [];
+    $('.settingsElement .checkBox').addClass("compute");
+    while ($('.checkBox.settings.compute').length > 0) {
+        var id = $('.checkBox.settings.compute').attr("data-id");
+        var active = $('.checkBox.settings.compute')[0].classList.contains("active");
+        saveObj.push({ id: id, active: active });
+        console.log($('.checkBox.settings.compute'));
+        console.log($('.checkBox.settings.compute').hasClass("active"));
+        $('.checkBox.settings.compute')[0].classList.remove("compute");
+    }
+    $('.nav_menu_subElement').hide();
+    saveSettingsRequest(saveObj);
+}
+
+
+function addSettings() {
+    if (serverSettings != undefined) {
+        element = oTemplates['settingsElement'];
+        if (element != "" && element != undefined) {
+            var tmp;
+            $('.settingsContainer').html("");
+            serverSettings.forEach(function(set) {
+                tmp = element.replaceAll("%ACTIVE%", (set.isActive == 1) ? "active" : "");
+                tmp = tmp.replaceAll("%ID%", set.id);
+                tmp = tmp.replaceAll("%TEXT%", set.name);
+                $('.settingsContainer').append(tmp);
+            });
+        }
+    }
+}
 
 function showUserManagement() {
     if (userList != null) {
@@ -307,14 +342,14 @@ function showObjectManagement() {
     }
 }
 
-function showObjectSubManagement() {
+function showObjectSubManagement(id, name) {
     if (objectSubList != null) {
         header = oTemplates['objectListContainerHeader'];
         footer = oTemplates['objectListContainerFooter'];
         element = oTemplates['objectListElement'];
         if (header != undefined && footer != undefined && element != undefined) {
-            html = header.replaceAll("%OBJECTID%", objectSubList[0].refId);
-            html = html.replaceAll("%OBJECTNAME%", objectSubList[0].refName);
+            html = header.replaceAll("%OBJECTID%", id);
+            html = html.replaceAll("%OBJECTNAME%", name);
             var tmp;
             objectSubList.forEach(function(object) {
                 tmp = element;
@@ -354,6 +389,7 @@ function showEditObject() {
             html = html.replaceAll("%OBJECT_NAME%", oEditableObject.object.name);
             html = html.replaceAll("%REF_ID%", oEditableObject.object.refId);
             html = html.replaceAll("%OBJECT_ID%", oEditableObject.object.id);
+            html = html.replaceAll("%REF_NAME%", oEditableObject.object.refName);
             html = html.replaceAll("%HIDDEN_IMAGE%", (oEditableObject.object.hasImages == 0 ? "hidden" : ""));
             var tmp;
 
@@ -458,4 +494,38 @@ function showImageUploadWindow(id) {
 
 function saveLocalSettings() {
     localStorage.setItem("omsSettings", JSON.stringify(Settings));
+}
+
+function addChangelog() {
+    var element = oTemplates['changelog'];
+    if (element != "" && element != undefined && changeLog != undefined) {
+        $('#changelogList').html("");
+        changeLog.forEach(function(change) {
+            tmp = element.replaceAll("%NEW%", (change.new == 1) ? "new" : "");
+            tmp = tmp.replaceAll("%DATE%", change.date.split(" ")[0]);
+            tmp = tmp.replaceAll("%TYPE%", (change.type == 0) ? "Changelog V" + change.version : "Website Änderung");
+            tmp += "<ul>";
+            var texts = change.text.split("%%");
+            texts.forEach(function(text) {
+                if (text != "") {
+                    tmp += "<li>" + text + "</li>";
+                }
+            });
+            tmp += "</ul>";
+            $('#changelogList').append(tmp);
+        });
+    }
+}
+
+function closeTarget(target) {
+    $(target).hide();
+}
+
+function showTarget(target) {
+    $(target).show();
+}
+
+function showChangelog() {
+    $('.changeLogWindow').show();
+    $('.nav_menu_button.newIndicator').removeClass("newIndicator");
 }

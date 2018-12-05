@@ -25,6 +25,7 @@ if(!userLoggedIn()) {
             $userToken = $result['username']."%§".(rand(1, 9999) * 6);
             $_SESSION['user'] = $result;
             $_SESSION['userToken'] = $userToken;
+            $_SESSION['admin'] = true;
             $_SESSION['userName'] = $result['username'];
             header("Location: ../oms.php");
         } else {

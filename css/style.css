@@ -869,6 +869,11 @@ textarea:focus {
     content: 'Öffentlich';
 }
 
+.objectEdit_Content_Image_Public_Indicator.cover::after {
+    background: var(--color-sienna);
+    content: 'Titelbild';
+}
+
 .objectEdit_FieldList {
     display: flex;
     flex-wrap: wrap;

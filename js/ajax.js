@@ -54,6 +54,7 @@ function getSettings() {
             if (bTry) {
                 serverSettings = response.data;
                 addSettings();
+                checkNavigation();
             }
         }
     });
@@ -133,6 +134,7 @@ function getUserList(mode) {
                     userList = response.data;
                     if (mode == 2) {
                         showUserManagement();
+                        location.hash = "page=user";
                     }
                 } else {
                     userList = null;
@@ -185,6 +187,7 @@ function getObjectList() {
                 if (response.success == true) {
                     objectList = response.data;
                     showObjectManagement();
+                    location.hash = "page=obj";
                 }
             }
         }
@@ -199,6 +202,29 @@ function changeImageInternal(id, refId) {
         url: "Services/ObjectService.php",
         data: {
             request: "changeImageInternal",
+            id: id
+        },
+        success: function(response) {
+            var bTry = true;
+            try {
+                response = JSON.parse(response);
+            } catch (e) {
+                console.log(e);
+                bTry = false;
+            }
+            if (bTry) {
+                editObjectWithId(refId);
+            }
+        }
+
+    });
+}
+
+function changeImageCover(id, refId) {
+    $.post({
+        url: "Services/ObjectService.php",
+        data: {
+            request: "changeImageCover",
             id: id
         },
         success: function(response) {
@@ -259,6 +285,7 @@ function getObjectSubList(id, name) {
                 if (response.success == true) {
                     objectSubList = response.data;
                     showObjectSubManagement(id, name);
+                    location.hash = "page=objLi&obj=" + id + "&name=" + name;
                 }
             } else {}
         }
@@ -387,6 +414,7 @@ function loadObjectData(id) {
                 if (response.success == true) {
                     oEditableObject = response.data;
                     showEditObject();
+                    location.hash = "page=objEd&obj=" + id;
                 }
             } else {}
         }

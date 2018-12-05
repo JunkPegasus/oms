@@ -4,7 +4,7 @@ include_once("../Common/Database.php");
 
 function loadObjectList() {
     global $conn;
-    $stmt = $conn->prepare("SELECT * FROM objects");
+    $stmt = $conn->prepare("SELECT * FROM objects ORDER BY name");
     $stmt->execute();
     $result = $stmt->fetchAll(PDO::FETCH_ASSOC);
     return $result;
@@ -72,17 +72,6 @@ function loadObject($id) {
 
 
 
-function insertField($field, $refId) {
-    global $conn;
-    $stmt = $conn->prepare("INSERT INTO fieldvalues (refField, refObj, `value`) VALUES (:refField, :refObj, :value) ");
-    $stmt->bindParam(':refObj', $refId);
-    $stmt->bindParam(':refField', $field['refField']);
-    $stmt->bindParam(':value', $field['value']);
-    return $stmt->execute();
-}
-
-
-
 
 function saveFieldData($fields) {
     if(connectToDB()) {
@@ -93,6 +82,7 @@ function saveFieldData($fields) {
                 break;
             }
         }
+        $success = saveBerichtOrVorstand($fields);
         new Response($success,"Feld Daten speichern");
     }
 }
@@ -117,6 +107,38 @@ function saveField($field) {
         $stmt->bindParam(':refField', $field['id']);
         $stmt->bindParam(':refObj', $field['refId']);
         return $stmt->execute();
+    }
+
+}
+
+function saveBerichtOrVorstand($fields) {
+    if(connectToDB()) {
+        global $conn;
+        $obj = loadObject($fields[0]['refId']);
+        $refId = $obj['object']['refId'];
+        $id = $obj['object']['id'];
+        if($refId == "1" || $refId == "2") {
+            switch ($refId) {
+                case "1":
+                    $stmt = $conn->prepare("UPDATE berichte SET name=:name, text=:text, datum=:datum, ort=:ort WHERE refObj=:id");
+                    $stmt->bindParam(':name', $fields[0]['value']);
+                    $stmt->bindParam(':text', $fields[1]['value']);
+                    $stmt->bindParam(':datum', $fields[3]['value']);
+                    $stmt->bindParam(':ort', $fields[2]['value']);
+                    $stmt->bindParam(':id', $id);
+                    return $stmt->execute();
+                    break;
+                case "2":
+                    $stmt = $conn->prepare("UPDATE vorstand SET name=:name, rang=:rang, charakteristik=:charakteristik, reihenfolge=:reihenfolge WHERE refObj=:id");
+                    $stmt->bindParam(':name', $fields[0]['value']);
+                    $stmt->bindParam(':rang', $fields[1]['value']);
+                    $stmt->bindParam(':reihenfolge', $fields[2]['value']);
+                    $stmt->bindParam(':charakteristik', $fields[3]['value']);
+                    $stmt->bindParam(':id', $id);
+                    return $stmt->execute();
+                    break;
+            }
+        }
     }
 }
 
@@ -195,7 +217,39 @@ function deleteObject($id) {
 
         $success = $stmt->execute();
 
+        switch($object['object']['refId']) {
+            case "1":
+                $success = deleteFromBerichte($id);
+                break;
+            case "2":
+                $success = deleteFromVorstand($id);
+                break;
+        }
+            
+
         new Response($success, "Objekt löschen.");
+    }
+}
+
+function deleteFromVorstand($refId) {
+    if(connectToDB()) {
+        global $conn;
+
+        $stmt = $conn->prepare("DELETE FROM vorstand WHERE refObj=:id");
+        $stmt->bindParam(':id', $refId);
+
+        return $stmt->execute();
+    }
+}
+
+function deleteFromBerichte($refId) {
+    if(connectToDB()) {
+        global $conn;
+
+        $stmt = $conn->prepare("DELETE FROM berichte WHERE refObj=:id");
+        $stmt->bindParam(':id', $refId);
+
+        return $stmt->execute();
     }
 }
 
@@ -226,10 +280,39 @@ function createObject($obj) {
 
         $success = $stmt->execute();
 
+        
+        switch($refId) {
+            case "1":
+                $success = createBericht($conn->lastInsertId());
+                break;
+            case "2":
+                $success = createVorstand($conn->lastInsertId());
+                break;
+        }
+
         new Response($success, $objectType['name']." erstellen.");
     }
 }
 
+function createBericht($id) {
+    if(connectToDB()) {
+        global $conn;
+        $stmt = $conn->prepare("INSERT INTO berichte (refObj) VALUES (:refObj) ");
+        $stmt->bindParam(':refObj', $id);
+
+        return $stmt->execute();
+    }
+}
+
+function createVorstand($id) {
+    if(connectToDB()) {
+        global $conn;
+        $stmt = $conn->prepare("INSERT INTO vorstand (refObj) VALUES (:refObj) ");
+        $stmt->bindParam(':refObj', $id);
+
+        return $stmt->execute();
+    }
+}
 function changePublicStatus($id) {
     if(connectToDB()) {
         $object = loadObject($id);
@@ -306,6 +389,29 @@ function changeImagePublic($id) {
             $stmt->bindParam(':public', $public);
             $stmt->bindParam(':id', $id);
             $success = $stmt->execute();
+            new Response($success, "Bild veröffentlichen");
+        } else {
+            new Response(false, "Bild nicht vorhanden");
+        }
+
+    }
+}
+
+function changeImageCover($id) {
+    if(connectToDB()) {
+        global $conn;
+        $image = getImage($id);
+        if($image != false) {
+            $refId = $image['refId'];
+            $stmt = $conn->prepare("UPDATE images SET isCoverImage=0 WHERE refId=:refId");
+            $stmt->bindParam(':refId', $refId);
+            $success = $stmt->execute();
+
+            
+            $stmt = $conn->prepare("UPDATE images SET isCoverImage=1, public=1 WHERE id=:id");
+            $stmt->bindParam(':id', $id);
+            $success = $stmt->execute();
+
             new Response($success, "Bild veröffentlichen");
         } else {
             new Response(false, "Bild nicht vorhanden");

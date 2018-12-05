@@ -112,6 +112,13 @@ function checkRequest() {
                     new Response(false, "Wrong request");
                 }
                 break;
+            case "changeImageCover":
+                if(checkPost("id")) {
+                    changeImageCover(getPost("id"));
+                } else {
+                    new Response(false, "Wrong request");
+                }
+                break;
             default:
                 new Response(false, "Wrong request");
                 break;

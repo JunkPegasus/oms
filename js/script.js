@@ -421,6 +421,7 @@ function showEditObject() {
                 oEditableObject.images.forEach(function(image) {
                     tmp = imageElement.replaceAll("%IMAGE_INTERNAL%", (image.internal == 1 ? "internal" : ""));
                     tmp = tmp.replaceAll("%IMAGE_PUBLIC%", (image.public == 1 ? "public" : ""));
+                    tmp = tmp.replaceAll("%IMAGE_COVER%", (image.isCoverImage == 1 ? "cover" : ""));
                     tmp = tmp.replaceAll("%IMAGE_SRC%", image.path);
                     tmp = tmp.replaceAll("%IMAGE_ID%", image.id);
                     tmp = tmp.replaceAll("%REF_ID%", image.refId);
@@ -537,4 +538,46 @@ function checkChangeLog() {
 
         }
     });
+}
+
+function checkNavigation() {
+    var hash = location.hash;
+    if (hash != "") {
+        hashArr = hash.split("&");
+        if (hashArr.length < 2 && hashArr[0] != "") {
+            hashArr = hashArr[0].split("=");
+            if (hashArr.length == 2) {
+                var content = hashArr[1];
+                if (content != "") {
+                    switch (content) {
+                        case "obj":
+                            getObjectList();
+                            break;
+                        case "user":
+                            getUserList(2);
+                            break;
+                    }
+                }
+            }
+        } else if (hashArr.length == 2) {
+            var page = hashArr[0].split("=")[1];
+            var content = hashArr[1].split("=")[1];
+            if (page == "objEd") {
+                content = parseInt(content);
+                if (content != NaN) {
+                    editObjectWithId(content);
+                }
+            }
+        } else if (hashArr.length == 3) {
+            var page = hashArr[0].split("=")[1];
+            var content = hashArr[1].split("=")[1];
+            var name = hashArr[2].split("=")[1];
+            if (page == "objLi") {
+                content = parseInt(content);
+                if (content != NaN) {
+                    getObjectSubList(content, name);
+                }
+            }
+        }
+    }
 }

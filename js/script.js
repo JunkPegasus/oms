@@ -20,6 +20,12 @@ $(document).ready(function() {
     var data = {
         beforeSubmit: function() {
             showStatusBar("Hochladen...");
+            if (!checkFileSize()) {
+                changeStatusBarStatus("error");
+                changeStatusBarText("Fehler beim Hochladen");
+                alert("Bild-Datei-Größe zu groß. Bitte insgesamt nur 20 Bilder mit einer maximalen Gesamtgröße von 64 MB hochladen");
+                return false;
+            }
         },
         success: function(response) {
             var bTry = true;
@@ -37,11 +43,11 @@ $(document).ready(function() {
                     closeImageUploadWindow();
                 } else {
                     changeStatusBarStatus("error");
-                    changeStatusBarText("Fehler Hochladen");
+                    changeStatusBarText("Fehler beim Hochladen");
                 }
             } else {
                 changeStatusBarStatus("error");
-                changeStatusBarText("Fehler Hochladen");
+                changeStatusBarText("Fehler beim Hochladen");
             }
         }
     }
@@ -49,6 +55,24 @@ $(document).ready(function() {
     $('#iUpload').ajaxForm(data);
 
 });
+
+function checkFileSize() {
+    var size = 0;
+    var counter = 0;
+    for (var i = 0; i < $('#pI')[0].files.length; i++) {
+        size += $('#pI')[0].files[i].size;
+        counter++;
+    }
+    for (var i = 0; i < $('#iI')[0].files.length; i++) {
+        size += $('#iI')[0].files[i].size;
+        counter++;
+    }
+    if (size < 64000000 && counter <= 20) {
+        return true;
+    } else {
+        return false;
+    }
+}
 
 function toggleActive(element) {
     $(element).toggleClass("active");
@@ -491,6 +515,8 @@ function showImageUploadWindow(id) {
     $('#iUpload').resetForm();
     $('#objId').val(id);
     $('.uploadImagesWindow').show();
+    $('[for=iI]').html("Interne Bilder");
+    $('[for=pI]').html("Öffentliche Bilder");
 }
 
 function saveLocalSettings() {

@@ -94,7 +94,7 @@ if (!userLoggedIn()) {
                         <input id="uEw_isAdminAllowed" type="checkbox" name="isAdminAllowed">
                     </div>
                     <div class="uEw_footer">
-                        <div class="uEw_btn active" id="deleteUserBtn" onclick="deleteUserWithID()">Löschen</div>
+                        <div class="uEw_btn active delete" id="deleteUserBtn" onclick="deleteUserWithID()">Löschen</div>
                         <div class="uEw_btn" onclick="closeUserEditWindow()">Abbrechen</div>
                         <input type="submit" value="Speichern">
                         <input id="uEw_id" name="id" type="hidden" required>

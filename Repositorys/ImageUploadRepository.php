@@ -69,17 +69,22 @@ function uploadImages($path,$postVariable, $objId) {
 function saveImageDetailsInDB($objId, $path, $postVariable) {
     if(connectToDB()) {
         global $conn;
-        $internal = 1;
-        if($postVariable == "publicImages") {
-            $internal = 0;
-        }
+        $object = loadObject($objId);
+        if($object !== false) {
+            $internal = 1;
+            if($postVariable == "publicImages") {
+                $internal = 0;
+            }
 
-        $stmt = $conn->prepare("INSERT INTO images (internal, path, refId) VALUES (:internal, :path, :refId)");
-        $stmt->bindParam(":internal", $internal);
-        $stmt->bindParam(":path", $path);
-        $stmt->bindParam(":refId", $objId);
+            $stmt = $conn->prepare("INSERT INTO images (internal, path, refId, refObj) VALUES (:internal, :path, :refId, :refObj)");
+            $stmt->bindParam(":internal", $internal);
+            $stmt->bindParam(":path", $path);
+            $stmt->bindParam(":refId", $objId);
+            $stmt->bindParam(":refObj", $object['object']['refId']);
 
-        return $stmt->execute();
+            return $stmt->execute();
+        }   
+        return false;
     }
 }
 

@@ -76,13 +76,15 @@ function loadObject($id) {
 function saveFieldData($fields) {
     if(connectToDB()) {
         $success = true;
-        foreach($fields as $field) {
-            $success = saveField($field);
-            if(!$success) {
-                break;
+        $success = saveBerichtOrVorstand($fields);
+        if($success) {
+            foreach($fields as $field) {
+                $success = saveField($field);
+                if(!$success) {
+                    break;
+                }
             }
         }
-        $success = saveBerichtOrVorstand($fields);
         new Response($success,"Feld Daten speichern");
     }
 }
@@ -120,13 +122,18 @@ function saveBerichtOrVorstand($fields) {
         if($refId == "1" || $refId == "2") {
             switch ($refId) {
                 case "1":
-                    $stmt = $conn->prepare("UPDATE berichte SET name=:name, text=:text, datum=:datum, ort=:ort WHERE refObj=:id");
-                    $stmt->bindParam(':name', $fields[0]['value']);
-                    $stmt->bindParam(':text', $fields[1]['value']);
-                    $stmt->bindParam(':datum', $fields[3]['value']);
-                    $stmt->bindParam(':ort', $fields[2]['value']);
-                    $stmt->bindParam(':id', $id);
-                    return $stmt->execute();
+                    $datum = formatDate($fields[3]['value']);
+                    if($datum !== false) {
+                        $stmt = $conn->prepare("UPDATE berichte SET name=:name, text=:text, datum=:datum, ort=:ort WHERE refObj=:id");
+                        $stmt->bindParam(':name', $fields[0]['value']);
+                        $stmt->bindParam(':text', $fields[1]['value']);
+                        $stmt->bindParam(':datum', $datum);
+                        $stmt->bindParam(':ort', $fields[2]['value']);
+                        $stmt->bindParam(':id', $id);
+                        return $stmt->execute();
+                    } else {
+                        return false;
+                    }
                     break;
                 case "2":
                     $stmt = $conn->prepare("UPDATE vorstand SET name=:name, rang=:rang, charakteristik=:charakteristik, reihenfolge=:reihenfolge WHERE refObj=:id");
@@ -140,6 +147,18 @@ function saveBerichtOrVorstand($fields) {
             }
         }
     }
+}
+
+function formatDate($s) {
+    if(strpos($s, ".") !== false) {
+        $arr = explode(".", $s);
+        if(sizeof($arr) == 3) {
+            if(strlen($arr[0]) == 2 && strlen($arr[1]) == 2 && strlen($arr[2]) == 4) {
+                return $arr[2]."-".$arr[1]."-".$arr[0];
+            }
+        }
+    }
+    return false;
 }
 
 function deleteImage($id) {

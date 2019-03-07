@@ -583,8 +583,13 @@ textarea:focus {
 .ulM_Element:hover,
 .objectEdit_MenuItem:hover,
 .oLe_Element:hover {
-    border: 1px solid var(--color-orange);
-    background: var(--color-orange);
+    border: 1px solid rgba(0, 0, 0, .4);
+    background: rgba(0, 0, 0, .1);
+}
+
+.delete:hover {
+    border: 1px solid rgb(255, 27, 15);
+    background: rgb(255, 27, 15);
     color: white;
 }
 

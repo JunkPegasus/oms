@@ -6,7 +6,7 @@
 			<div class="objectEdit_MenuItem" onclick="changeObjectPublicStatus(%OBJECT_ID%)">Veröffentlichen</div>
 			<div class="objectEdit_MenuItem" onclick="saveObjectFields(%OBJECT_ID%)">Speichern</div>
 			<div class="objectEdit_MenuItem %HIDDEN_IMAGE%" onclick="showImageUploadWindow(%OBJECT_ID%)">Bilder hochladen</div>
-			<div class="objectEdit_MenuItem" onclick="deleteObjectRequest(%OBJECT_ID%, %REF_ID%, '%REF_NAME%')">Löschen</div>
+			<div class="objectEdit_MenuItem delete" onclick="deleteObjectRequest(%OBJECT_ID%, %REF_ID%, '%REF_NAME%')">Löschen</div>
 		</div>
 		<div class="objectEdit_Heading %GLOBAL_PUBLIC%">%OBJECT_NAME%</div>
 	</div>

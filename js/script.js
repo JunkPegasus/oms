@@ -3,7 +3,14 @@ var Settings;
 
 $(document).ready(function() {
     Settings = JSON.parse(localStorage.getItem("omsSettings"));
-
+    $('#iP').on('change', () => {
+        var fileCounter = $('#iP')[0].files.length;
+        if(fileCounter > 0) {
+            $('.selectionYes').addClass("show");
+        } else {
+            $('.selectionYes').removeClass("show");
+        }
+    })
 
 
     $('.uploadImagesWindow [type=file]').on('change', function() {
@@ -54,6 +61,38 @@ $(document).ready(function() {
 
     $('#iUpload').ajaxForm(data);
 
+
+    
+    var excel = {
+        beforeSubmit: function() {
+            showStatusBar("Importiere...");
+        },
+        success: function(response) {
+            console.log(response);
+            var bTry = true;
+            try {
+                response = JSON.parse(response);
+            } catch (e) {
+                console.log(e);
+                bTry = false;
+            }
+            if (bTry) {
+                if (response.success == true) {
+                    changeStatusBarStatus("success");
+                    changeStatusBarText("Erfolgreich importiert");
+                    closeImportPutzplanWindow();
+                } else {
+                    changeStatusBarStatus("error");
+                    changeStatusBarText("Fehler beim Importieren");
+                }
+            } else {
+                changeStatusBarStatus("error");
+                changeStatusBarText("Fehler beim Importieren");
+            }
+        }
+    }
+
+    $('#importPutzplan').ajaxForm(excel);
 });
 
 function checkFileSize() {
@@ -250,7 +289,18 @@ function changeStatusBarText(message) {
 
 function closeUserEditWindow() {
     $('.userEditWindow').hide();
-    $('.uEw_form').trigger("reset");
+}
+
+function closeImportPutzplanWindow() {
+    $('.importPutzplanWindow').hide();
+    $('#importPutzplan').trigger("reset");
+    $('.selectionYes').removeClass("show");
+}
+
+function showImportPutzplan() {
+    $('.importPutzplanWindow').show();
+    $('#importPutzplan').trigger("reset");
+    $('.selectionYes').removeClass("show");
 }
 
 function toggleUserListMenuBurgerMenu() {

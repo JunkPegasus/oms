@@ -612,7 +612,7 @@ textarea:focus {
     display: block;
 }
 
-.deleteMultipleWindow,
+.deleteMultipleWindow,.importPutzplanWindow,
 .uploadImagesWindow {
     position: fixed;
     top: 50%;
@@ -626,6 +626,21 @@ textarea:focus {
     display: none;
 }
 
+#exampleXLSX {
+    width: 100%;
+}
+
+#labelExcel {
+    display: flex;
+    justify-content: space-between;
+}
+.selectionYes.show {
+    width: 10px;
+    height: 20px;
+    border-bottom: 4px solid rgb(28, 214, 44);
+    border-right: 4px solid rgb(28, 214, 44);
+    transform: rotate(45deg);
+}
 .changeLogWindow {
     position: fixed;
     top: 50%;

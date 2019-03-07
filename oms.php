@@ -32,6 +32,7 @@ if (!userLoggedIn()) {
                     <div class="nav_menu_button"onclick="getObjectList()">Objekte</div>
                     <div class="nav_menu_button" onclick="getUserList(2)">Benutzer</div>
                     <div class="nav_menu_button" id="changelogToggle" onclick="showChangelog()">Changelog</div>
+                    <div class="nav_menu_button" onclick="showImportPutzplan()">Putzplan</div>
                 </div>
             </div>
             <div class="nav_right">
@@ -174,6 +175,24 @@ if (!userLoggedIn()) {
                 </ul>
             </div>
         </div>
+        
+
+        <div class="importPutzplanWindow">
+            <div class="windowHeader">
+                <div class="windowheaderCaption">Putzplan importieren</div>
+                <div class="windowheaderCloseBtn" onclick="closeImportPutzplanWindow()">
+                    <img src="images/icons/SVG/Icon_Close_White.svg">
+                </div>
+            </div>
+            <div class="windowContent">
+                <form action="Services/ExcelService.php" id="importPutzplan" method="post">
+                <p>Die .xlsx Datei muss eine Struktur wie auf dem Bild aufweisen!</p>
+                    <img src="images/exampleXLSX.PNG" id="exampleXLSX">
+                    <input id="iP" type="file" name="fileToUpload" accept=".xlsx" placeholder="Putzplan" required/>
+                    <label for="iP" id="labelExcel">Putzplan Excel-Datei auswählen <div class="selectionYes"></div></label>
+                    <input type="submit" value="Hochladen">
+                </form>
+            </div>
     </body>
 
     </html>

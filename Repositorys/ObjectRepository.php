@@ -130,7 +130,9 @@ function saveBerichtOrVorstand($fields) {
                         $stmt->bindParam(':datum', $datum);
                         $stmt->bindParam(':ort', $fields[2]['value']);
                         $stmt->bindParam(':id', $id);
-                        return $stmt->execute();
+                        if($stmt->execute()) {
+                            return saveEditor($id);
+                        }
                     } else {
                         return false;
                     }
@@ -142,11 +144,21 @@ function saveBerichtOrVorstand($fields) {
                     $stmt->bindParam(':reihenfolge', $fields[2]['value']);
                     $stmt->bindParam(':charakteristik', $fields[3]['value']);
                     $stmt->bindParam(':id', $id);
-                    return $stmt->execute();
+                    if($stmt->execute()) {
+                        return saveEditor($id);
+                    }
                     break;
             }
         }
     }
+}
+
+function saveEditor($id) {
+    global $conn;
+    $stmt = $conn->prepare("UPDATE objectlist SET dateChanged=CURRENT_TIMESTAMP, userChanged=:user WHERE id=:id");
+    $stmt->bindParam(':id', $id);
+    $stmt->bindParam(':user', $_SESSION['userName']);
+    return $stmt->execute();
 }
 
 function formatDate($s) {
@@ -347,7 +359,7 @@ function changePublicStatus($id) {
         $stmt->bindParam(':id', $id);
 
         $success = $stmt->execute();
-
+        saveEditor($id);
         new Response($success, "Status ändern.");
     }
 }
@@ -408,6 +420,7 @@ function changeImagePublic($id) {
             $stmt->bindParam(':public', $public);
             $stmt->bindParam(':id', $id);
             $success = $stmt->execute();
+            saveEditor($image['refId']);
             new Response($success, "Bild veröffentlichen");
         } else {
             new Response(false, "Bild nicht vorhanden");
@@ -431,6 +444,7 @@ function changeImageCover($id) {
             $stmt->bindParam(':id', $id);
             $success = $stmt->execute();
 
+            saveEditor($image['refId']);
             new Response($success, "Bild veröffentlichen");
         } else {
             new Response(false, "Bild nicht vorhanden");
@@ -452,6 +466,7 @@ function changeImageInternal($id) {
             $stmt->bindParam(':internal', $internal);
             $stmt->bindParam(':id', $id);
             $success = $stmt->execute();
+            saveEditor($image['refId']);
             new Response($success, "Bild in internen Bereich schieben");
         }else {
             new Response(false, "Bild nicht vorhanden");

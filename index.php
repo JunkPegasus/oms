@@ -23,9 +23,18 @@ if (userLoggedIn()) {
     </head>
     <body>
     <h1>Login</h1>
+        <?php if(isset($_GET['login'])) {?>
+            <div class="messageIndicator">
+                <?php
+                    if($_GET['login'] == "error") echo "Falsches Passwort oder Benutzername!";
+                    if($_GET['login'] == "credentials") echo "Kein Passwort oder Benutzername eingegeben!";
+                    if($_GET['login'] == "server") echo "Interner Serverfehler. Bitte melde den Fehler.";
+                ?>
+            </div>
+        <?php } ?>
         <form action="Services/LoginService.php" method="post">
-            <input type="text" name="username" placeholder="Benutzername">
-            <input type="password" name="password" palceholder="Passwort">
+            <input type="text" name="username" placeholder="Benutzername" required>
+            <input type="password" name="password" placeholder="Passwort" required>
             <input type="submit" value="Login">
         </form>
     </body>

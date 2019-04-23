@@ -31,6 +31,10 @@ if(!userLoggedIn()) {
         } else {
             header("Location: ../index.php?login=error");
         }
+    } else if(!checkPost("password") || !checkPost("username")) {
+        header("Location: ../index.php?login=credentials");
+    } else {
+        header("Location: ../index.php?login=server");
     }
 } else {
     header("Location: ../oms.php");

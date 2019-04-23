@@ -1,0 +1,53 @@
+body {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}
+
+h1 {
+    font-family: 'Roboto', sans-serif;
+    font-weight: 900;
+}
+
+form {
+    font-family: 'Open Sans', sans-serif;
+    display: flex;
+    flex-direction: column;
+}
+
+input {
+    box-sizing: border-box;
+    width: 100%;
+    padding: 8px 15px;
+    margin: 5px 0;
+    border-radius: 5px;
+    border: 1px solid rgba(0, 0, 0, .2);
+    outline: none;
+    transition: all ease 0.2s;
+}
+
+input:not([type=submit]):focus {
+    border: 1px solid rgba(0, 0, 0, .4);
+    box-shadow: 0 0 5px rgba(0, 0, 0, .1);
+}
+
+input[type=submit] {
+    background: #011627;
+    color: rgb(242, 244, 243);
+    cursor: pointer;
+}
+
+input[type=submit]:hover {
+    background: #70798C;
+}
+
+.messageIndicator {
+    font-size: 12px;
+    font-family: 'Open Sans', sans-serif;
+    border: 1px solid rgba(255, 27, 15, .6);
+    border-radius: 5px;
+    background: rgba(255, 27, 15, 0.05);
+    padding: 8px 15px;
+    margin: 5px 0;
+}
